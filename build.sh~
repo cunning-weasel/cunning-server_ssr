@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gcc cunning-server-ssr.c -o cunning-server-ssr -g
