@@ -1,8 +1,9 @@
-// TO-DO: custom alloc so resp isn't limited by size and we not heavy on the stack
-// also some function to append quotes so we can work with web files easy
-// then probably custom file handling
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TO-DO: custom alloc so resp isn't limited by size and we not heavy on the stack.
+// Also some function to append quotes so we can work with web files easy.
+// Then probably custom file handling.
 // ... eish!
-
+// ... or just do everything on the stack brute-force?
 #include <arpa/inet.h>
 #include <errno.h>
 #include <stdio.h>
@@ -31,7 +32,7 @@ size_t cunning_weasel_len(char *str)
     char *start = NULL;
     char *end = NULL;
     size_t len = 0;
-    size_t cap = 10000; // char = 1 bit. 1 kb = 1024 bytes. 10000/1024 = 9.77 kb
+    size_t cap = 10000; // char = 1 bit. 1 kb = 1024 bytes. 10000 / 1024 = 9.77 kb
 
     if (start && str >= start && str <= end) 
     {
