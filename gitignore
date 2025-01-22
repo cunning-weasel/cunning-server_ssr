@@ -1,1 +1,7 @@
-cunning-server_ssr
+# ignore lock files created by Emacs
+.\#*
+
+# emacs temporary files
+*#
+*~
+.\#*

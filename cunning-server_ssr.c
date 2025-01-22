@@ -51,6 +51,52 @@ size_t cunning_weasel_len(char *str)
     return len;
 }
 
+// custom read file or nah ?
+char *read_file(char * path)
+{
+    FILE *file = fopen(path, "r");
+    if (!file)
+    {
+	perror("Failed to open file master weasel :(\n");
+	return NULL;
+    }
+
+    fseek(file, 0,  SEEK_END);
+    size_t size = ftell(file);
+    rewind(file);
+    char *content = mmap(size + 1);
+    if (!content)
+    {
+	fclose(file);
+	perror("failed to alloc mem\n");
+	return NULL;
+    }
+
+    fread(content, 1, size, file);
+    fclose(file);
+    content[size] = '\0';
+    return content;
+}
+
+char *build_res(char *html, char *css, char *js, char *markdown)
+{
+    char *header = ""
+	           ""
+	           "";
+
+    size_t total_size = weasel_len(header) + weasel_len(html) + weasel_len(css) + weasel_len(js) + weasel_len(markdown);
+    char *res = mmap(total_size);
+    if (!res)
+    {
+	perror("Failed to alloc mem for res");
+	return NULL;
+    }
+    snprintf(res, total_size, "%s%s%s%s%s", header, html, css, js, markdown);
+    return res;
+}
+
+// TO-DO: throw the above in the loop 
+
 int main() 
 {
     char buffer[BUFFER_SIZE];
